@@ -7,7 +7,7 @@ The daemon binds a loopback port, prints one JSON line when it is ready, and kee
 ## Install
 
 ```bash
-npx -y @borg0ai/brainstorm-server@6.4.2 start --screen path/to/screen.html
+npx -y @borg0ai/brainstorm-server@6.5.0 start --screen path/to/screen.html
 ```
 
 The first run resolves the package through the npm registry and caches it. Later runs start from cache.

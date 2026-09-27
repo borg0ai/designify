@@ -26,7 +26,7 @@ A question *about* a UI topic is not automatically a visual question. "What kind
 
 ## How It Works
 
-The companion is the published npm package `@borg0ai/brainstorm-server`. Run it with `npx -y @borg0ai/brainstorm-server@6.4.2` from the user's project. The version is pinned to the one that ships with this plugin, so a plugin release always drives a matching CLI. The first run resolves the package through the npm registry and caches it; later runs start from cache. Without a registry, `npx` fails loudly and there is no visual companion — say so rather than pretending the screen is up.
+The companion is the published npm package `@borg0ai/brainstorm-server`. Run it with `npx -y @borg0ai/brainstorm-server@6.5.0` from the user's project. The version is pinned to the one that ships with this plugin, so a plugin release always drives a matching CLI. The first run resolves the package through the npm registry and caches it; later runs start from cache. Without a registry, `npx` fails loudly and there is no visual companion — say so rather than pretending the screen is up.
 
 `start` serves one HTML file. Write that file first, then start. The process keeps running after the parent exits. Clicks with a non-empty `choice` are appended to `.designify/brainstorm/events`. The file is served as you wrote it. There is no directory watch and no frame wrapper.
 
@@ -34,7 +34,7 @@ The companion is the published npm package `@borg0ai/brainstorm-server`. Run it 
 
 ```bash
 # Write the screen file first. Run from the user's project root.
-npx -y @borg0ai/brainstorm-server@6.4.2 start --screen path/to/screen.html
+npx -y @borg0ai/brainstorm-server@6.5.0 start --screen path/to/screen.html
 
 # {"type":"ready","url":"http://localhost:<port>/?key=<token>","port":<port>,"pid":<pid>,"serverId":"<id>"}
 ```
@@ -46,7 +46,7 @@ State defaults to `.designify/brainstorm/` under the current working directory. 
 If the environment reaps detached processes, add `--foreground` and background the tool call:
 
 ```bash
-npx -y @borg0ai/brainstorm-server@6.4.2 start --screen path/to/screen.html --foreground
+npx -y @borg0ai/brainstorm-server@6.5.0 start --screen path/to/screen.html --foreground
 ```
 
 The server binds `127.0.0.1` only.
@@ -60,7 +60,7 @@ The server binds `127.0.0.1` only.
 2. **Tell the user what is on the screen and end your turn.** Repeat the full URL. Ask them to look and reply in the terminal.
 3. **On your next turn**, read `.designify/brainstorm/events` if it exists. Merge those JSON lines with what they typed. The terminal message is the primary feedback.
 4. **Iterate or advance.** A changed screen is a new file and a new `start`. Move on only after this step is validated.
-5. **Leave the browser** when the next step is text. `npx -y @borg0ai/brainstorm-server@6.4.2 stop`. Continue in the terminal.
+5. **Leave the browser** when the next step is text. `npx -y @borg0ai/brainstorm-server@6.5.0 stop`. Continue in the terminal.
 6. Repeat until done.
 
 ## Writing the Screen
@@ -132,7 +132,7 @@ Read lines written since your last turn. The last `choice` is the latest click. 
 ## Cleaning Up
 
 ```bash
-npx -y @borg0ai/brainstorm-server@6.4.2 stop
+npx -y @borg0ai/brainstorm-server@6.5.0 stop
 ```
 
 Mockup files you wrote stay on disk. `stop` removes `server.json` and `server.pid` under `.designify/brainstorm/`.

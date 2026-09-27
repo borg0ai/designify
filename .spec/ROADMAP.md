@@ -33,3 +33,4 @@
 | 0029 | [Invoke the published brainstorm CLI from the skill](rfc/completed/0029-brainstorm-cli-via-npm.md) | Implemented |
 | 0030 | [Make Qingniao Doctor match repository checks](rfc/completed/0030-qingniao-doctor.md) | Implemented |
 | 0031 | [Make Qingniao post-version formatting runnable](rfc/completed/0031-qingniao-format.md) | Implemented |
+| 0032 | [Align pinned CLI documentation version](rfc/completed/0032-pin-cli-version.md) | Implemented |
