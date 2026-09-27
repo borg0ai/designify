@@ -34,3 +34,4 @@
 | 0030 | [Make Qingniao Doctor match repository checks](rfc/completed/0030-qingniao-doctor.md) | Implemented |
 | 0031 | [Make Qingniao post-version formatting runnable](rfc/completed/0031-qingniao-format.md) | Implemented |
 | 0032 | [Align pinned CLI documentation version](rfc/completed/0032-pin-cli-version.md) | Implemented |
+| 0033 | [Delete scripts and tests targeting removed implementations](rfc/completed/0033-delete-dead-scripts-and-tests.md) | Implemented |

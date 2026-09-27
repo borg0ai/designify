@@ -432,9 +432,18 @@ Risk: A later bump can fail the same assertion if documentation examples are not
 Reviewer attention: Confirm example pins read 6.5.0 and that the version-sync assertion is among the 23 passing tests. The completed RFC is the only path named for this change.
 
 ### Archive RFC 0032 once documentation pins match 6.5.0
-Status: agent-initiated — not requested in the failure report
-Touches: `.spec/rfc/completed/0032-pin-cli-version.md`
+Status: directed — archived with the pin fix, not left open
+Touches: `.spec/rfc/completed/`
 
-RFC 0032 was archived under the completed RFC set after the documentation examples matched 6.5.0 and the root test suite passed.
+The Qingniao release path runs the root pnpm test task by default. That task failed while documentation pins were still 6.4.2 and the CLI and plugin were already 6.5.0. Once the pins matched 6.5.0 and the same check passed, RFC 0032 was archived under .spec/rfc/completed/ and included in commit 6bebeab together with the documentation version fix.
 
-Reviewer attention: Confirm 0032-pin-cli-version.md is under .spec/rfc/completed and that its acceptance matches the tree.
+Reviewer attention: Confirm RFC 0032 exists only under .spec/rfc/completed/ and that commit 6bebeab also contains the documentation pin update from 6.4.2 to 6.5.0.
+
+### Commit the release-verification note apart from the RFC archive
+Status: discussed
+Touches: `.reasongraph/why/main.md`
+
+Commit 6bebeab holds the documentation version fix and archived RFC 0032. The staged ReasonGraph note .reasongraph/why/main.md was committed alone as 0ab9621 with message docs: record designify release verification, then pushed so local HEAD matches origin/main.
+
+Considered/rejected: Including .reasongraph/why/main.md in 6bebeab was not done, so the archive commit would not take in that separate staged note.
+Reviewer attention: Confirm 0ab9621 changes only .reasongraph/why/main.md and that origin/main is at that commit.
