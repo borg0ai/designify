@@ -1,6 +1,6 @@
 {
   "name": "designify",
-  "version": "6.4.2",
+  "version": "6.5.0",
   "description": "One unified workflow for disciplined software design, implementation, debugging, review, and delivery.",
   "author": {
     "name": "Albert Li"

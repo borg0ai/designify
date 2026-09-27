@@ -1,7 +1,7 @@
 {
   "name": "designify-monorepo",
   "private": true,
-  "version": "6.4.2",
+  "version": "6.5.0",
   "description": "Designify workspace",
   "author": "Albert Li",
   "packageManager": "pnpm@10.27.0",
