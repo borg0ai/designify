@@ -9,7 +9,10 @@
     "test": "turbo run test --filter=@borg0ai/tests --filter=@borg0ai/brainstorm-server",
     "release": "qingniao",
     "typecheck": "pnpm --filter @borg0ai/brainstorm-server typecheck",
-    "build": "pnpm --filter @borg0ai/brainstorm-server build"
+    "build": "pnpm --filter @borg0ai/brainstorm-server build",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\""
   },
   "devDependencies": {
     "@borg0ai/brainstorm-server": "workspace:*",
