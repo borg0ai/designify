@@ -11,13 +11,14 @@
     "typecheck": "pnpm --filter @borg0ai/brainstorm-server typecheck",
     "build": "pnpm --filter @borg0ai/brainstorm-server build",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\""
+    "format": "prettier --write package.json \"packages/*/package.json\" tests/package.json designify/.plugin/plugin.json",
+    "format:check": "prettier --check package.json \"packages/*/package.json\" tests/package.json designify/.plugin/plugin.json"
   },
   "devDependencies": {
     "@borg0ai/brainstorm-server": "workspace:*",
     "@changesets/cli": "^2.31.1",
     "@systembug/qingniao": "^0.1.15",
+    "prettier": "^3.9.9",
     "turbo": "2.11.4"
   }
 }

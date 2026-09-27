@@ -34,6 +34,8 @@
 - [x] Implement RFC 0001: Brainstorm server CLI daemon (RFC 0001)
 - [x] Implement RFC 0029: Invoke the published brainstorm CLI from the skill (RFC 0029)
 - [x] Implement RFC 0030: Make Qingniao Doctor match repository checks (RFC 0030)
+- [x] Implement RFC 0031: Make Qingniao post-version formatting runnable (RFC 0031)
+
 
 
 

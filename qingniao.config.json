@@ -1,6 +1,6 @@
 {
   "checks": {
     "lint": false,
-    "format": false
+    "format": true
   }
 }

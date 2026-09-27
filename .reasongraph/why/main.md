@@ -378,3 +378,42 @@ RFC 0030 was marked Implemented and archived at .spec/rfc/completed/0030-qingnia
 Considered/rejected: Archiving before the Turbo build task existed, retrying the bump on a dirty worktree, or hand-editing the version to force the bump through.
 Risk: The archived RFC can be read as finished while the package version is still the pre-bump value and the minor changeset is unapplied.
 Reviewer attention: Confirm the completed RFC is Implemented, that @borg0ai/brainstorm-server was not published, and that version fields were not hand-edited past 6.4.2.
+
+### Install Prettier so the root format script resolves
+Status: directed
+Touches: `package.json`
+
+The release format step runs the root format script, which invokes Prettier. Prettier was not installed, so the script could not be resolved. checks.format set to false only skips the format check; formatting that follows a version update still runs, so Prettier was installed and the root script remains a real Prettier invocation.
+
+Considered/rejected: Relying on checks.format false to skip the release format step was rejected because that flag does not skip formatting after a version update.
+
+### Limit the root format script to Qingniao version manifests
+Status: discussed
+Touches: `package.json`
+
+The root format script was limited to the version manifests a Qingniao version update rewrites, so a format run does not walk the rest of the repository.
+
+Considered/rejected: Formatting the whole repository was rejected so the release format step stays limited to those manifests.
+Risk: Paths outside those manifests are not formatted by the root format script.
+Reviewer attention: Confirm the format targets are the manifests Qingniao rewrites and that leaving the rest of the tree unformatted is intended.
+
+### Point the format glob at the four manifests that exist
+Status: discussed
+Touches: `package.json`
+
+Prettier exits with status 2 when a glob matches no files. skill-release.json is not in the repository, so the format script was narrowed to the four version manifests that do exist. pnpm format and pnpm format:check then both succeeded, and Qingniao Doctor returned exit code 0.
+
+Risk: A later manifest omitted from the glob will be skipped, and removing a listed file will make Prettier fail the format step again.
+Reviewer attention: Confirm each of the four targets exists on disk and that skill-release.json stays out of the glob.
+
+### Leave the version at 6.5.0 and skip bump and publish
+Status: discussed
+Touches: `package.json`
+
+The format-script fix was applied with the version left at 6.5.0. Qingniao stops a version bump while the worktree has uncommitted changes, so the bump was not run again and the package was not published.
+
+### Archive RFC 0031 once the format script passes
+Status: discussed
+Touches: `.spec/rfc/completed/0031-qingniao-format.md`
+
+RFC 0031 records the Qingniao format-script fix. It was archived at .spec/rfc/completed/0031-qingniao-format.md after pnpm format and pnpm format:check passed, with the version still at 6.5.0.

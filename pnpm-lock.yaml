@@ -17,6 +17,9 @@ importers:
       '@systembug/qingniao':
         specifier: ^0.1.15
         version: 0.1.15(@changesets/cli@2.31.1(@types/node@26.6.3))(@types/node@26.6.3)(typescript@7.0.2)
+      prettier:
+        specifier: ^3.9.9
+        version: 3.9.9
       turbo:
         specifier: 2.11.4
         version: 2.11.4
@@ -1146,6 +1149,11 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+
+  prettier@3.9.9:
+    resolution: {integrity: sha512-Z/CJHIkdujO/OtN7nXUii0Rf3VT5SRuhjBA82Xvu2XhBUgX3nhP67T0LHceBdQLex7OOFGTox+Q5Yg8Jk2Qivg==}
+    engines: {node: '>=14'}
     hasBin: true
 
   process-warning@5.1.0:
@@ -2502,6 +2510,8 @@ snapshots:
       source-map-js: 1.2.1
 
   prettier@2.8.8: {}
+
+  prettier@3.9.9: {}
 
   process-warning@5.1.0: {}
 
