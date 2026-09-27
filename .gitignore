@@ -2,8 +2,11 @@
 .private-journal/
 .claude/
 .superpowers/
+.designify/
 .DS_Store
 node_modules/
+.turbo/
+packages/brainstorm-server/dist/
 inspo
 triage/
 
@@ -17,3 +20,6 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+
+# ReasonGraph local state (per-machine)
+.reasongraph/state/

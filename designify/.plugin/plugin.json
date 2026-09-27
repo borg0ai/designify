@@ -1,0 +1,17 @@
+{
+  "name": "designify",
+  "version": "6.4.2",
+  "description": "One unified workflow for disciplined software design, implementation, debugging, review, and delivery.",
+  "author": {
+    "name": "Albert Li"
+  },
+  "license": "MIT",
+  "keywords": [
+    "software-design",
+    "planning",
+    "tdd",
+    "debugging",
+    "code-review",
+    "agent-workflows"
+  ]
+}

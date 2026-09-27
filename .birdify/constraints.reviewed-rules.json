@@ -1,0 +1,24 @@
+{
+  "revision": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+  "scope": "仅审查当前 Designify skill refine 任务直接适用的 AGENTS.md 技能修改规则；未审查的工作流细则与其他贡献者要求保留为覆盖缺口。",
+  "groups": [
+    {
+      "sourcePath": "AGENTS.md",
+      "category": "testing",
+      "topic": {
+        "id": "skill-evaluation",
+        "name": "技能行为评估"
+      },
+      "rules": [
+        {
+          "id": "skill-change-evaluation",
+          "name": "技能行为修改需要评估证据",
+          "anchor": "If you modify skill content:",
+          "explanation": "技能内容会塑造代理行为；修改技能时按项目规则使用 writing-skills 工作流，并在提交 PR 前提供多会话对抗评测与修改前后结果。精调的 Red Flags、合理化清单和 human partner 用语不能无证据重写。",
+          "condition": "修改技能行为内容；其中 PR 评测交付要求仅在准备提交 PR 时触发。",
+          "verification": "确认使用 writing-skills 工作流；若准备 PR，核对多个会话的对抗评测及修改前后结果，并确认精调段落有改进证据。"
+        }
+      ]
+    }
+  ]
+}

@@ -9,8 +9,8 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 USING_SKILL="$REPO_ROOT/skills/using-git-worktrees/SKILL.md"
 FINISHING_SKILL="$REPO_ROOT/skills/finishing-a-development-branch/SKILL.md"
-ROTOTILL_SPEC="$REPO_ROOT/docs/superpowers/specs/2026-04-06-worktree-rototill-design.md"
-ROTOTILL_PLAN="$REPO_ROOT/docs/superpowers/plans/2026-04-06-worktree-rototill.md"
+ROTOTILL_SPEC="$REPO_ROOT/.spec/rfc/completed/0015-worktree-detect-and-defer.md"
+ROTOTILL_PLAN="$REPO_ROOT/.spec/rfc/completed/0015-worktree-detect-and-defer.md"
 
 failures=0
 

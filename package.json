@@ -1,23 +1,20 @@
 {
-  "name": "superpowers",
+  "name": "designify-monorepo",
+  "private": true,
   "version": "6.4.2",
-  "description": "Superpowers skills and runtime bootstrap for coding agents",
-  "type": "module",
-  "main": ".opencode/plugins/superpowers.js",
-  "keywords": [
-    "pi-package",
-    "skills",
-    "tdd",
-    "debugging",
-    "collaboration",
-    "workflow"
-  ],
-  "pi": {
-    "extensions": [
-      "./.pi/extensions/superpowers.ts"
-    ],
-    "skills": [
-      "./skills"
-    ]
+  "description": "Designify workspace",
+  "author": "Albert Li",
+  "packageManager": "pnpm@10.27.0",
+  "scripts": {
+    "test": "turbo run test --filter=@borg0ai/tests --filter=@borg0ai/brainstorm-server",
+    "release": "qingniao",
+    "typecheck": "pnpm --filter @borg0ai/brainstorm-server typecheck",
+    "build": "pnpm --filter @borg0ai/brainstorm-server build"
+  },
+  "devDependencies": {
+    "@borg0ai/brainstorm-server": "workspace:*",
+    "@changesets/cli": "^2.31.1",
+    "@systembug/qingniao": "^0.1.15",
+    "turbo": "2.11.4"
   }
 }

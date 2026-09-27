@@ -1,0 +1,6 @@
+{
+  "checks": {
+    "lint": false,
+    "format": false
+  }
+}

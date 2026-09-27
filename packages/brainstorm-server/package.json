@@ -1,0 +1,33 @@
+{
+  "name": "@borg0ai/brainstorm-server",
+  "version": "6.4.2",
+  "description": "brainstorm-server CLI.",
+  "license": "MIT",
+  "author": "Albert Li",
+  "type": "module",
+  "bin": {
+    "brainstorm": "./dist/brainstorm.js"
+  },
+  "exports": {
+    ".": "./dist/brainstorm.js",
+    "./cli": "./dist/brainstorm.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "prepack": "pnpm run build",
+    "test": "pnpm run typecheck && pnpm run build && node --test tests/brainstorm-server.test.ts tests/brainstorm-cli.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "ws": "^8.21.0"
+  }
+}

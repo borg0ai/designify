@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "mapId": "designify",
+  "revision": 1,
+  "project": {
+    "id": "designify-repository",
+    "name": "Designify"
+  },
+  "constraintDiscovery": {
+    "checkedAt": "2026-09-27T16:34:05Z",
+    "checkedPaths": [
+      "AGENTS.md",
+      "README.md",
+      "designify/.plugin/plugin.json",
+      "designify/skills/designify/SKILL.md",
+      "designify/skills/designify/workflows/writing-plans/workflow.md",
+      "designify/skills/designify/workflows/test-driven-development/workflow.md",
+      "designify/skills/designify/workflows/executing-plans/workflow.md",
+      ".spec/ROADMAP.md",
+      ".spec/TASK_TRACKING.md",
+      ".spec/rfc/0001-brainstorm-cli.md",
+      "package.json",
+      "pnpm-workspace.yaml",
+      "packages/brainstorm-server/package.json",
+      "designify/hooks/hooks.json",
+      "designify/hooks/session-start.mjs"
+    ],
+    "uninspectedPaths": [
+      "designify/skills/designify/workflows/** (except listed workflows)",
+      "remaining repository instruction references and workflow docs"
+    ]
+  },
+  "modules": [
+    {
+      "id": "plugin-package",
+      "name": "Plugin package",
+      "kind": "local",
+      "responsibility": "Declare Designify as one installable OpenPlugin package with one skill entrypoint.",
+      "ownership": [
+        {
+          "kind": "directory",
+          "path": "designify/.plugin"
+        },
+        {
+          "kind": "directory",
+          "path": "designify/skills/designify"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "line": 14,
+          "note": "README documents one OpenPlugin package and one skill."
+        },
+        {
+          "path": "designify/.plugin/plugin.json",
+          "note": "Plugin manifest identifies Designify."
+        }
+      ],
+      "status": "supported",
+      "openQuestions": [],
+      "layout": {
+        "row": 0,
+        "column": 0
+      },
+      "role": "generic",
+      "roleAssessment": {
+        "basis": "out-of-taxonomy",
+        "note": "Designify responsibilities describe a plugin package, skill workflow, or RFC service boundary, not one of Birdify’s runtime roles."
+      }
+    },
+    {
+      "id": "skill-router",
+      "name": "Designify skill router",
+      "kind": "local",
+      "responsibility": "Route user requests to relevant workflow references and enforce RFC-first design and artifact boundaries.",
+      "ownership": [
+        {
+          "kind": "file",
+          "path": "designify/skills/designify/SKILL.md"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "designify/skills/designify/SKILL.md",
+          "line": 8,
+          "note": "Entrypoint states the single-skill router model."
+        },
+        {
+          "path": "designify/skills/designify/SKILL.md",
+          "line": 31,
+          "endLine": 40,
+          "note": "Run it establishes Specify RFC, approval, and artifact rules."
+        }
+      ],
+      "status": "supported",
+      "openQuestions": [],
+      "layout": {
+        "row": 0,
+        "column": 1
+      },
+      "role": "generic",
+      "roleAssessment": {
+        "basis": "out-of-taxonomy",
+        "note": "Designify responsibilities describe a plugin package, skill workflow, or RFC service boundary, not one of Birdify’s runtime roles."
+      }
+    },
+    {
+      "id": "workflow-references",
+      "name": "Workflow references",
+      "kind": "local",
+      "responsibility": "Provide focused instructions for brainstorming, RFC planning, TDD, execution, review, and other engineering stages.",
+      "ownership": [
+        {
+          "kind": "directory",
+          "path": "designify/skills/designify/workflows"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "designify/skills/designify/workflows/writing-plans/workflow.md",
+          "line": 5,
+          "note": "RFC is explicitly the sole implementation plan."
+        },
+        {
+          "path": "designify/skills/designify/workflows/test-driven-development/workflow.md",
+          "line": 1,
+          "note": "TDD guidance is a workflow reference."
+        }
+      ],
+      "status": "supported",
+      "openQuestions": [],
+      "layout": {
+        "row": 1,
+        "column": 1
+      },
+      "role": "generic",
+      "roleAssessment": {
+        "basis": "out-of-taxonomy",
+        "note": "Designify responsibilities describe a plugin package, skill workflow, or RFC service boundary, not one of Birdify’s runtime roles."
+      }
+    },
+    {
+      "id": "specify",
+      "name": "Specify RFC lifecycle",
+      "kind": "external",
+      "responsibility": "Create, validate, advance, and archive RFCs and synchronize Specify-managed status files.",
+      "ownership": [],
+      "evidence": [
+        {
+          "path": "designify/skills/designify/workflows/writing-plans/workflow.md",
+          "line": 9,
+          "endLine": 17,
+          "note": "Planning reference delegates RFC lifecycle to Specify."
+        },
+        {
+          "path": ".spec/ROADMAP.md",
+          "note": "Repository roadmap tracks RFC 0001."
+        }
+      ],
+      "status": "supported",
+      "openQuestions": [],
+      "layout": {
+        "row": 1,
+        "column": 0
+      },
+      "role": "generic",
+      "roleAssessment": {
+        "basis": "out-of-taxonomy",
+        "note": "Designify responsibilities describe a plugin package, skill workflow, or RFC service boundary, not one of Birdify’s runtime roles."
+      }
+    },
+    {
+      "id": "brainstorm-hook",
+      "name": "Session start hook",
+      "kind": "local",
+      "responsibility": "Load the Designify skill entrypoint during supported host session startup events.",
+      "ownership": [
+        {
+          "kind": "directory",
+          "path": "designify/hooks"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "designify/hooks/hooks.json",
+          "note": "SessionStart hook registers startup, clear, and compact events."
+        },
+        {
+          "path": "designify/hooks/session-start.mjs",
+          "note": "Hook resolves and reads the skill entrypoint."
+        }
+      ],
+      "status": "supported",
+      "openQuestions": [],
+      "layout": {
+        "row": 2,
+        "column": 0
+      },
+      "role": "backend"
+    },
+    {
+      "id": "brainstorm-cli",
+      "name": "Brainstorm companion CLI",
+      "kind": "local",
+      "responsibility": "Run the local brainstorming companion server and persist participant choices as events.",
+      "ownership": [
+        {
+          "kind": "directory",
+          "path": "packages/brainstorm-server"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "packages/brainstorm-server/package.json",
+          "note": "Workspace package exposes brainstorm executable."
+        },
+        {
+          "path": ".spec/rfc/0001-brainstorm-cli.md",
+          "note": "Draft RFC records migration from legacy launch scripts to CLI daemon."
+        }
+      ],
+      "status": "uncertain",
+      "openQuestions": [
+        "Draft RFC 0001 describes removal of legacy launch scripts; current tree still contains them, so migration is in progress.",
+        "Browser preview behavior was not inspected in a visible browser during this map pass."
+      ],
+      "layout": {
+        "row": 2,
+        "column": 1
+      },
+      "role": "backend"
+    },
+    {
+      "id": "repo-spec-tooling",
+      "name": "Repository spec and test tooling",
+      "kind": "local",
+      "responsibility": "Track RFC status and run repository-level package checks outside the installable plugin payload.",
+      "ownership": [
+        {
+          "kind": "directory",
+          "path": ".spec"
+        },
+        {
+          "kind": "directory",
+          "path": "tests"
+        },
+        {
+          "kind": "file",
+          "path": "package.json"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "line": 16,
+          "note": "README separates RFC artifacts and test locations from plugin package."
+        },
+        {
+          "path": "package.json",
+          "note": "Root scripts and workspace configure development tooling."
+        }
+      ],
+      "status": "supported",
+      "openQuestions": [],
+      "layout": {
+        "row": 3,
+        "column": 0
+      },
+      "role": "database"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "package-routes-to-skill",
+      "from": "plugin-package",
+      "to": "skill-router",
+      "label": "installs entrypoint",
+      "evidence": [
+        {
+          "path": "designify/.plugin/plugin.json",
+          "note": "Manifest declares the Designify skill path."
+        }
+      ],
+      "kind": "dependency",
+      "visibility": "overview",
+      "status": "supported",
+      "openQuestions": []
+    },
+    {
+      "id": "router-loads-workflows",
+      "from": "skill-router",
+      "to": "workflow-references",
+      "label": "loads focused guidance",
+      "evidence": [
+        {
+          "path": "designify/skills/designify/SKILL.md",
+          "line": 8,
+          "note": "Router loads selected workflow references."
+        }
+      ],
+      "kind": "dependency",
+      "visibility": "overview",
+      "status": "supported",
+      "openQuestions": []
+    },
+    {
+      "id": "planning-delegates-specify",
+      "from": "workflow-references",
+      "to": "specify",
+      "label": "delegates RFC lifecycle",
+      "evidence": [
+        {
+          "path": "designify/skills/designify/workflows/writing-plans/workflow.md",
+          "line": 9,
+          "note": "Writing-plans workflow requires Specify."
+        }
+      ],
+      "kind": "dependency",
+      "visibility": "overview",
+      "status": "supported",
+      "openQuestions": []
+    },
+    {
+      "id": "hook-loads-router",
+      "from": "brainstorm-hook",
+      "to": "skill-router",
+      "label": "loads at session start",
+      "evidence": [
+        {
+          "path": "designify/hooks/session-start.mjs",
+          "note": "Session-start hook reads SKILL.md."
+        }
+      ],
+      "kind": "control",
+      "visibility": "detail",
+      "status": "supported",
+      "openQuestions": []
+    },
+    {
+      "id": "brainstorm-guidance-starts-cli",
+      "from": "workflow-references",
+      "to": "brainstorm-cli",
+      "label": "starts companion process",
+      "evidence": [
+        {
+          "path": "designify/skills/designify/workflows/brainstorming/visual-companion.md",
+          "note": "Visual companion instructions invoke the brainstorm CLI."
+        }
+      ],
+      "kind": "control",
+      "visibility": "detail",
+      "status": "uncertain",
+      "openQuestions": [
+        "Draft RFC 0001 has not removed all legacy launch scripts from the current tree."
+      ]
+    },
+    {
+      "id": "repo-tracks-design-work",
+      "from": "repo-spec-tooling",
+      "to": "specify",
+      "label": "tracks RFC status",
+      "evidence": [
+        {
+          "path": ".spec/TASK_TRACKING.md",
+          "note": "Specify task file tracks active RFC work."
+        }
+      ],
+      "kind": "event",
+      "visibility": "detail",
+      "status": "supported",
+      "openQuestions": []
+    }
+  ],
+  "constraints": [
+    {
+      "id": "single-designify-skill",
+      "name": "Keep one discoverable Designify skill",
+      "note": "User explicitly said to keep workflow guidance unified under designify/ instead of creating many sub-skills.",
+      "origin": "user",
+      "strength": "required",
+      "applicability": "applicable",
+      "scope": "modules",
+      "modules": [
+        "plugin-package",
+        "skill-router",
+        "workflow-references"
+      ],
+      "relationships": [],
+      "evidence": [],
+      "verification": "Inspect package tree and confirm one canonical SKILL.md entrypoint; workflow references remain ordinary files."
+    },
+    {
+      "id": "rfc-is-implementation-plan",
+      "name": "Use Specify RFC as sole implementation plan",
+      "note": "Entrypoint requires RFC-first change workflow and says RFC is the only design and implementation plan.",
+      "origin": "local",
+      "strength": "required",
+      "applicability": "applicable",
+      "scope": "modules",
+      "modules": [
+        "skill-router",
+        "workflow-references",
+        "specify"
+      ],
+      "relationships": [],
+      "evidence": [
+        {
+          "path": "designify/skills/designify/SKILL.md",
+          "line": 32,
+          "endLine": 34,
+          "note": "Requires Specify RFC and prohibits parallel plans."
+        }
+      ],
+      "verification": "Review planning and execution references for conflicting standalone plan requirements."
+    },
+    {
+      "id": "designify-artifact-boundaries",
+      "name": "Keep TDD and SDD artifacts under .designify",
+      "note": "Entrypoint explicitly locates TDD notes and SDD execution records by RFC slug.",
+      "origin": "local",
+      "strength": "required",
+      "applicability": "applicable",
+      "scope": "modules",
+      "modules": [
+        "skill-router",
+        "workflow-references",
+        "repo-spec-tooling"
+      ],
+      "relationships": [],
+      "evidence": [
+        {
+          "path": "designify/skills/designify/SKILL.md",
+          "line": 35,
+          "note": "Defines .designify/tdd and .designify/sdd paths."
+        }
+      ],
+      "verification": "Check skill references for these paths and confirm product tests remain in normal test locations."
+    }
+  ]
+}
