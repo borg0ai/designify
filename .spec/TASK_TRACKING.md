@@ -16,8 +16,6 @@
 - [ ] Implement RFC 0025: Keep the Hermes plugin version in lockstep (RFC 0025)
 - [ ] Implement RFC 0027: Rewrite composition prohibitions that backfire (RFC 0027)
 - [ ] Implement RFC 0028: Cheapen SDD mechanics without moving judgment (RFC 0028)
-- [ ] Implement RFC 0030: Make Qingniao Doctor match repository checks (RFC 0030)
-
 
 ## Done
 - [x] Implement RFC 0003: Prepare @borg0ai/brainstorm-server for npm publication (RFC 0003)
@@ -35,6 +33,8 @@
 - [x] Implement RFC 0026: Diagnose a failed agent session from the transcript (RFC 0026)
 - [x] Implement RFC 0001: Brainstorm server CLI daemon (RFC 0001)
 - [x] Implement RFC 0029: Invoke the published brainstorm CLI from the skill (RFC 0029)
+- [x] Implement RFC 0030: Make Qingniao Doctor match repository checks (RFC 0030)
+
 
 
 

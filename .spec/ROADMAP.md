@@ -31,4 +31,4 @@
 | 0027 | [Rewrite composition prohibitions that backfire](rfc/0027-positive-instruction-prose.md) | Draft |
 | 0028 | [Cheapen SDD mechanics without moving judgment](rfc/0028-strict-cost-sdd.md) | Draft |
 | 0029 | [Invoke the published brainstorm CLI from the skill](rfc/completed/0029-brainstorm-cli-via-npm.md) | Implemented |
-| 0030 | [Make Qingniao Doctor match repository checks](rfc/0030-qingniao-doctor.md) | Approved |
+| 0030 | [Make Qingniao Doctor match repository checks](rfc/completed/0030-qingniao-doctor.md) | Implemented |

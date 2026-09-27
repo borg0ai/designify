@@ -1,6 +1,9 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
+    "build": {
+      "outputs": ["dist/**"]
+    },
     "test": {
       "dependsOn": ["^test"],
       "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/designify/**"]

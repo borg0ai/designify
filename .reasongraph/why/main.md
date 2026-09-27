@@ -358,3 +358,23 @@ Status: agent-initiated — not requested in plan or prompts
 Touches: `scripts/bump-version.sh`, `.version-bump.json`, `package.json`, `.spec/rfc/completed/0003-publish-brainstorm-cli.md`, `.changeset/*`
 
 scripts/bump-version.sh cannot run because .version-bump.json is absent. RFC 0003 is marked Implemented, but the release script and the qingniao and changesets dependencies it describes are not in package.json; only .changeset/ is present. Neither was changed. No fix was chosen; both were left outside this change.
+
+### Add the Turbo build task Qingniao auto-runs
+Status: discussed
+Touches: `turbo.json`, `.spec/rfc/completed/0030-qingniao-doctor.md`
+
+Qingniao detects turbo.json and runs turbo run build. The pipeline defined only test, so the build phase failed because no build task existed. The missing task was added to turbo.json and written into approved RFC 0030. pnpm exec turbo run build then built @borg0ai/brainstorm-server, and Qingniao Doctor and Plan both passed.
+
+Considered/rejected: Leaving the Turbo pipeline as test-only, which cannot satisfy the detected turbo run build command.
+Risk: A required build task can fail the same build phase for any workspace package that has no build script.
+Reviewer attention: Confirm turbo.json defines build, that it is the task Qingniao invokes, and that the successful run still includes @borg0ai/brainstorm-server.
+
+### Archive RFC 0030 without applying the version bump
+Status: directed — close after the working fix, not as a document-only ending
+Touches: `.spec/rfc/completed/0030-qingniao-doctor.md`
+
+RFC 0030 was marked Implemented and archived at .spec/rfc/completed/0030-qingniao-doctor.md only after the Turbo build task existed and Qingniao Doctor and Plan had passed. An unpublished bump, intended with --yes --skip-publish --skip-build, had already stopped with exit code 1 because the worktree had uncommitted changes, and it was not retried. Plan had named @borg0ai/brainstorm-server@6.4.2 as the only publishable package and a minor changeset was prepared for that new CLI; no version field was hand-edited and nothing was published. The bump stays a separate clean-tree release.
+
+Considered/rejected: Archiving before the Turbo build task existed, retrying the bump on a dirty worktree, or hand-editing the version to force the bump through.
+Risk: The archived RFC can be read as finished while the package version is still the pre-bump value and the minor changeset is unapplied.
+Reviewer attention: Confirm the completed RFC is Implemented, that @borg0ai/brainstorm-server was not published, and that version fields were not hand-edited past 6.4.2.
