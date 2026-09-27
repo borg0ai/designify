@@ -408,12 +408,33 @@ Reviewer attention: Confirm each of the four targets exists on disk and that ski
 
 ### Leave the version at 6.5.0 and skip bump and publish
 Status: discussed
-Touches: `package.json`
+Touches: `.spec/rfc/completed/0032-pin-cli-version.md`
 
-The format-script fix was applied with the version left at 6.5.0. Qingniao stops a version bump while the worktree has uncommitted changes, so the bump was not run again and the package was not published.
+The version-sync failure was not treated as a reason to change package versions. The CLI and plugin packages were already at 6.5.0. JSON version fields were left unchanged, the version bump was not re-run, and release and publish were not re-run.
+
+Considered/rejected: Hand-editing version fields, or running Qingniao to rewrite them, was set aside once the packages were already 6.5.0 and the stale pin was in documentation examples.
+Reviewer attention: Confirm no version field moved off 6.5.0 and that nothing was published.
 
 ### Archive RFC 0031 once the format script passes
 Status: discussed
 Touches: `.spec/rfc/completed/0031-qingniao-format.md`
 
 RFC 0031 records the Qingniao format-script fix. It was archived at .spec/rfc/completed/0031-qingniao-format.md after pnpm format and pnpm format:check passed, with the version still at 6.5.0.
+
+### Sync active documentation CLI examples from 6.4.2 to 6.5.0
+Status: discussed
+Touches: `.spec/rfc/completed/0032-pin-cli-version.md`
+
+A test rerun passed 15 of 16 tests. The remaining failure was a version-sync assertion: the CLI was 6.5.0 while active documentation still pinned the CLI example at 6.4.2. Those examples were updated to 6.5.0. A later root pnpm test run passed all 23 tests.
+
+Considered/rejected: Treating a plugin manifest as still on 6.4.2 was dropped after the mismatch was located in documentation pins; Qingniao had already raised the CLI and plugins to 6.5.0.
+Risk: A later bump can fail the same assertion if documentation examples are not updated with the manifests.
+Reviewer attention: Confirm example pins read 6.5.0 and that the version-sync assertion is among the 23 passing tests. The completed RFC is the only path named for this change.
+
+### Archive RFC 0032 once documentation pins match 6.5.0
+Status: agent-initiated — not requested in the failure report
+Touches: `.spec/rfc/completed/0032-pin-cli-version.md`
+
+RFC 0032 was archived under the completed RFC set after the documentation examples matched 6.5.0 and the root test suite passed.
+
+Reviewer attention: Confirm 0032-pin-cli-version.md is under .spec/rfc/completed and that its acceptance matches the tree.
