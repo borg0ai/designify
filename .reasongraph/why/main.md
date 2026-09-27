@@ -447,3 +447,52 @@ Commit 6bebeab holds the documentation version fix and archived RFC 0032. The st
 
 Considered/rejected: Including .reasongraph/why/main.md in 6bebeab was not done, so the archive commit would not take in that separate staged note.
 Reviewer attention: Confirm 0ab9621 changes only .reasongraph/why/main.md and that origin/main is at that commit.
+
+### Install designify as a project-local skill copy
+Status: directed
+Touches: `.agents/skills/designify`, `skills-lock.json`
+
+Dogfood stays on the designify skill already in this repository, copied into the project skills directory. `npx skills add . --list` finds a single skill named designify, and `npx skills add . --skill designify --copy --yes` writes `.agents/skills/designify` plus `skills-lock.json`. The global npm prefix is left unchanged so the run uses that local copy.
+
+Considered/rejected: Driving dogfood from a globally installed CLI was set aside in favor of the repository skill copy.
+Risk: The generated skill copy and skills-lock.json can drift from the source skill.
+Reviewer attention: Confirm `.agents/skills/designify` and `skills-lock.json` are the intended local-install artifacts and that no global npm state was required.
+
+### Target the Codex agent when copying designify locally
+Status: agent-initiated — not requested in plan or prompts
+Touches: `.agents/skills/designify`
+
+The local copy command passes `--agent codex`, so the installed skill is written for that host under `.agents/skills/designify`. No rationale for choosing Codex over another host was recorded.
+
+Risk: Other agent hosts may not load a skill copied only into `.agents/skills`.
+Reviewer attention: Confirm Codex is the intended agent target for this repository's local skill install.
+
+### Dogfood the installed designify skill on the registry 404
+Status: discussed
+Touches: `.agents/skills/designify`
+
+The installed skill is exercised as a spike through its debugging flow on the `@borg0ai/brainstorm-server@6.5.0` install 404. A later anonymous registry query resolves that version and shows `latest` at 6.5.0, matching a short publish-index delay after the publisher reported success. Package sources are left unchanged.
+
+Considered/rejected: Retargeting the package name, publish access, or registry was not pursued once the anonymous query resolved 6.5.0.
+Reviewer attention: Confirm the 404 is treated as index lag and that no brainstorm-server source change landed from this dogfood.
+
+### Do not add skill-release.json for the local designify install
+Status: discussed
+Touches: `.agents/skills/designify`
+
+Skillify's publish check reports that the skill directory has no `skill-release.json`. The local copy install and skill listing still succeed without it, so the file is not added in this pass. The skill still fails Skillify release validation.
+
+Risk: A later Skillify publish check fails until skill-release.json exists.
+Reviewer attention: Confirm a missing skill-release.json is acceptable while only a local copy is required.
+
+### Adopt the installed designify skill as the workflow entry
+Status: directed
+Touches: `.agents/skills/designify/SKILL.md`
+
+The installed designify skill at .agents/skills/designify/SKILL.md is the process entry for later work in this repository. Workflow selection follows that skill file.
+
+### Gate persistent repository changes on a Specify RFC
+Status: discussed — follows from loading the designify skill
+Touches: `.agents/skills/designify/SKILL.md`
+
+Durable repository changes go through a Specify RFC before they are applied. The gate is the rule carried by the installed designify skill, not a separate process.
