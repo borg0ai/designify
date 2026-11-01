@@ -606,3 +606,47 @@ The agent checked release state read-only and did not tag, push, or create a Git
 Considered/rejected: Committing the pending changes and running the Shipify release immediately was rejected because the worktree held unrelated changes and the remote state could not be confirmed.
 Risk: If the pending changes are later bundled into the release commit, unrelated work would ship under the 6.5.0 version.
 Reviewer attention: Confirm the staged and unstaged changes belong to this release and that origin/main matches local main before running Shipify.
+
+### Document the 6.5.0 release notes in the README
+Status: discussed
+Touches: `README.md`
+
+The agent found that the README had no 6.5.0 release notes during release review. It added notes covering the unified plugin entry point and the visual companion CLI that ships with the repository.
+
+Considered/rejected: Leaving the README without release notes was not chosen because the release review flagged the gap.
+Reviewer attention: Confirm the README release notes match the 6.5.0 contents.
+
+### Skip republishing the brainstorm-server npm package for 6.5.0
+Status: discussed — npm registry already holds @borg0ai/brainstorm-server@6.5.0
+Touches: `README.md`
+
+The agent confirmed that @borg0ai/brainstorm-server@6.5.0 already exists on the npm registry, so it did not republish. The release plan keeps the GitHub Release as the place to attach the built tarball.
+
+Considered/rejected: Republishing the npm package was rejected because the version already exists there.
+Risk: The GitHub Release tarball and the npm package could diverge if the tarball is not built from the same commit.
+Reviewer attention: Confirm the attached tarball was built from the released commit and matches the npm 6.5.0 package.
+
+### Lint all changed shell files with ShellCheck before release
+Status: discussed
+Touches: `**/*.sh`
+
+The agent found that the default lint only checked uncommitted diffs, so earlier shell checks were not valid. It installed the ShellCheck CLI as a system tool, without adding a project dependency, and ran a targeted lint across the 20 changed shell files.
+
+Considered/rejected: Relying on the default lint scope was rejected because it skipped the shell files in this change.
+Reviewer attention: Confirm the targeted ShellCheck run covers every shell file changed for the release.
+
+### Fix the eleven ShellCheck warnings in the changed shell files
+Status: discussed — within scope approved by RFC 0036
+Touches: `**/*.sh`
+
+The targeted lint reported eleven ShellCheck warnings, concentrated in three changed files. The agent fixed them within the scope that RFC 0036 approved, then reran the acceptance checks.
+
+Reviewer attention: Check that the warning fixes keep the shell behavior unchanged.
+
+### Commit the README notes and lint fixes together
+Status: discussed
+Touches: `README.md`, `**/*.sh`
+
+The agent committed the README release notes and the ShellCheck fixes as one commit, afe28e3, and pushed it. Release verification passed: 22 tests, 7 CLI tests, format check, the lint of 20 shell files, the worktree policy script, and the RFC sync-check. The only failing Doctor check was the unauthenticated npm login.
+
+Reviewer attention: Confirm the Doctor npm login failure does not block the release, since 6.5.0 is already on npm.
