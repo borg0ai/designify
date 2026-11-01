@@ -2,7 +2,6 @@
 
 ## Active
 
-- [ ] Implement RFC 0002: Clarify RFC gate in Designify skill routing (RFC 0002)
 - [ ] Implement RFC 0004: Make skill prose and docs platform-neutral (Umbrella) (RFC 0004)
   - [ ] Implement RFC 0005: Neutralize generic Claude prose (child of 0004) (RFC 0005)
   - [ ] Implement RFC 0006: Neutralize instruction-file references (child of 0004) (RFC 0006)
@@ -16,6 +15,8 @@
 - [ ] Implement RFC 0025: Keep the Hermes plugin version in lockstep (RFC 0025)
 - [ ] Implement RFC 0027: Rewrite composition prohibitions that backfire (RFC 0027)
 - [ ] Implement RFC 0028: Cheapen SDD mechanics without moving judgment (RFC 0028)
+- [ ] Implement RFC 0034: Document project-scoped Codex plugin installation (RFC 0034)
+- [ ] Implement RFC 0036: Remove Residual Superpowers References from Repo Surfaces (RFC 0036)
 
 ## Done
 - [x] Implement RFC 0003: Prepare @borg0ai/brainstorm-server for npm publication (RFC 0003)
@@ -37,6 +38,11 @@
 - [x] Implement RFC 0031: Make Qingniao post-version formatting runnable (RFC 0031)
 - [x] Implement RFC 0032: Align pinned CLI documentation version (RFC 0032)
 - [x] Implement RFC 0033: Delete scripts and tests targeting removed implementations (RFC 0033)
+- [x] Implement RFC 0002: Clarify RFC gate in Designify skill routing (RFC 0002)
+- [x] Implement RFC 0035: Make Specify the Native Designify Workflow (RFC 0035)
+- [x] Implement RFC 0037: Remove upstream branding from active Designify docs (RFC 0037)
+
+
 
 
 

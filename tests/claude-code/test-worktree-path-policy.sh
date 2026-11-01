@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regression check: Superpowers should not route new worktrees through the old
+# Regression check: Designify should not route new worktrees through the old
 # global worktree directory.
 
 set -euo pipefail
@@ -47,16 +47,16 @@ assert_not_contains() {
 echo "=== Worktree Path Policy Test ==="
 echo ""
 
-assert_not_contains "$USING_SKILL" "~/.config/superpowers/worktrees" "using-git-worktrees does not mention old global path"
+assert_not_contains "$USING_SKILL" "~/.config/designify/worktrees" "using-git-worktrees does not mention old global path"
 assert_not_contains "$USING_SKILL" "global legacy" "using-git-worktrees does not use unclear global legacy shorthand"
 assert_not_contains "$USING_SKILL" "Global path" "using-git-worktrees has no global path quick-reference row"
 assert_contains "$USING_SKILL" 'default to `.worktrees/` at the project root' "using-git-worktrees defaults new manual worktrees to .worktrees/"
 
-assert_not_contains "$FINISHING_SKILL" "~/.config/superpowers/worktrees" "finishing-a-development-branch does not treat old global path as owned"
+assert_not_contains "$FINISHING_SKILL" "~/.config/designify/worktrees" "finishing-a-development-branch does not treat old global path as owned"
 assert_contains "$FINISHING_SKILL" '`.worktrees/` or `worktrees/`' "finishing-a-development-branch keeps project-local cleanup ownership"
 
-assert_not_contains "$ROTOTILL_SPEC" "~/.config/superpowers/worktrees" "rototill spec does not preserve old global path policy"
-assert_not_contains "$ROTOTILL_PLAN" "~/.config/superpowers/worktrees" "rototill plan does not preserve old global path policy"
+assert_not_contains "$ROTOTILL_SPEC" "~/.config/designify/worktrees" "rototill spec does not preserve old global path policy"
+assert_not_contains "$ROTOTILL_PLAN" "~/.config/designify/worktrees" "rototill plan does not preserve old global path policy"
 assert_not_contains "$ROTOTILL_PLAN" "legacy path compat" "rototill plan does not advertise legacy path compatibility"
 
 echo ""

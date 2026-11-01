@@ -3,7 +3,7 @@
 
 ## Artifact Location
 
-For work governed by an approved RFC, keep TDD cycle notes and captured RED/GREEN command output in `.designify/tdd/<RFC-filename-without-extension>/`. Keep product test files in the project's normal test directories so its test runner discovers them.
+For work governed by an approved RFC, keep TDD cycle notes and captured RED/GREEN command output in `.designify/tdd/<RFC-filename-without-extension>/`. Keep product test files in the project's normal test directories so its test runner discovers them. These notes are execution evidence, not a plan and not a status record — Specify owns both.
 
 ## Overview
 

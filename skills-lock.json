@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "designify": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "4e0f2a171f5a2f661758ed6ee65c016e7b6c41982316a62f1c8e3f8260636b84"
+    }
+  }
+}

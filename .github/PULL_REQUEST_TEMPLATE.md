@@ -4,9 +4,9 @@ sections blank, contain multiple unrelated changes, or show no evidence
 of human involvement will be closed without review.
 -->
 
-> **This PR MUST target the `dev` branch, not `main`.** `main` is the
-> released branch; active work lands on `dev` first. PRs opened against
-> `main` will be asked to retarget `dev` before review.
+> **Designify follows Specify's RFC lifecycle.** The change must be
+> delivered and validated as an RFC under `.spec/rfc/`, and implementation
+> starts only from an Approved RFC. Target `main`.
 
 ## Who is submitting this PR? (required)
 <!-- Required. PRs that omit this will be closed. We assume an agent wrote
@@ -29,11 +29,15 @@ of human involvement will be closed without review.
      "Improving" something is not a problem statement. What broke? What
      failed? What was the user experience that motivated this? -->
 
+## Which RFC does this implement?
+<!-- Link the Approved RFC (`.spec/rfc/NNNN-slug.md`). Executors consume the
+     approved RFC; do not open a PR without one. -->
+
 ## What does this PR change?
 <!-- 1-3 sentences. What, not why — the "why" belongs above. -->
 
 ## Is this change appropriate for the core library?
-<!-- Superpowers core contains general-purpose skills and infrastructure
+<!-- Designify core contains general-purpose skills and infrastructure
      that benefit all users. Ask yourself:
 
      - Would this be useful to someone working on a completely different
@@ -73,7 +77,7 @@ of human involvement will be closed without review.
      runner), you MUST include a session transcript proving the
      integration actually works.
 
-     A real integration loads the `using-superpowers` bootstrap at session
+     A real integration loads the Designify bootstrap (`designify/skills/designify/SKILL.md`) at session
      start. The bootstrap is what causes skills to auto-trigger. Without
      it, the skills are dead weight — present on disk but never invoked
      at the right moments.
@@ -83,8 +87,8 @@ of human involvement will be closed without review.
 
          Let's make a react todo list
 
-     A working integration auto-triggers the `brainstorming` skill before
-     any code is written. Paste the complete transcript below.
+     A working integration auto-triggers the `brainstorming` workflow
+     before any code is written. Paste the complete transcript below.
 
      These are NOT real integrations and PRs that ship them will be closed:
 
@@ -117,7 +121,7 @@ paste the complete transcript here
 
 ## Rigor
 
-- [ ] If this is a skills change: I used `superpowers:writing-skills` and
+- [ ] If this is a skills change: I used the `writing-skills` workflow and
       completed adversarial pressure testing (paste results below)
 - [ ] This change was tested adversarially, not just on the happy path
 - [ ] I did not modify carefully-tuned content (Red Flags table,

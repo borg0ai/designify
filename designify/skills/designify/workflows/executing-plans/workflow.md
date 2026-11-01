@@ -111,7 +111,10 @@ Conversation memory does not survive compaction. An inline executor that
 loses its place re-implements tasks whose commits already exist — the same
 failure as a controller re-dispatching them, paid for in your own context.
 Track progress in a ledger file, not only in todos. Harness todos are a
-live view; the ledger is the record.
+live view; the ledger is the record. The ledger is execution evidence,
+not a status authority: completion the human partner sees is reported
+through Specify-managed `.spec/` files when they authorize that lifecycle
+action.
 
 The workspace and ledger are shared with workflows/subagent-driven-development/workflow.md
 — same directory, same format — so a plan can change executors mid-flight
@@ -291,6 +294,11 @@ behalf — and the findings you chose not to act on — reach them.
 When the final review is clean and its fixes are committed, delete this
 plan's workspace directory — the git history is the record now. Sibling
 directories belong to other plans; leave them alone.
+
+Before that, close the loop with Specify: when your human partner
+authorizes the lifecycle action, check off this RFC's tasks and advance
+its status with Specify commands. The ledger was execution evidence;
+Specify-managed `.spec/` files are the status authority.
 
 Use workflows/finishing-a-development-branch/workflow.md.
 

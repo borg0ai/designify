@@ -15,7 +15,7 @@ Designify is one skill with focused workflow references. Start here, identify th
 | Create or refine RFC implementation plan | `workflows/writing-plans/workflow.md` |
 | Implement approved RFC in this session | `workflows/executing-plans/workflow.md` |
 | Implement approved RFC with task-level reviews | `workflows/subagent-driven-development/workflow.md` |
-| Implement a feature or fix | `workflows/test-driven-development/workflow.md` |
+| Implement a feature or fix governed by an approved RFC | `workflows/test-driven-development/workflow.md` |
 | Diagnose unexpected behavior | `workflows/systematic-debugging/workflow.md` |
 | Review incoming code feedback | `workflows/receiving-code-review/workflow.md` |
 | Request a review | `workflows/requesting-code-review/workflow.md` |
@@ -25,6 +25,8 @@ Designify is one skill with focused workflow references. Start here, identify th
 | Parallel independent tasks | `workflows/dispatching-parallel-agents/workflow.md` |
 | Create or change agent guidance | `workflows/writing-skills/workflow.md` |
 | Investigate a misfiring agent workflow | `workflows/diagnosing-agent-behavior/workflow.md` |
+
+A persistent change goes through Specify first: create the RFC, validate it, and get it approved. Only then load an implementation workflow. TDD is the implementation method after that approval. It is not a second plan, and the TDD row is not a way around the RFC.
 
 ## Run it
 

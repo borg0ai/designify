@@ -1,6 +1,6 @@
 # RFC 0002: Clarify RFC gate in Designify skill routing
 
-**Status:** Approved
+**Status:** Implemented
 
 ## Summary
 

@@ -226,6 +226,7 @@ is the whole process.
 - Put design and ordered `### Task N` implementation steps in the RFC's `## Design` section.
 - Keep checkboxes out of active RFCs; Specify owns `.spec/TASK_TRACKING.md`.
 - Run Specify `validate` before presenting the RFC for approval.
+- Before committing changes that touch `.spec/` files, run Specify `sync-check`; do not hand-edit ROADMAP or TASK_TRACKING.
 
 **RFC Review:**
 After validating the RFC, look at it with fresh eyes:
@@ -244,10 +245,13 @@ After the RFC review passes, ask the user to review the written RFC before proce
 
 Wait for the user's response. If they request changes, update and revalidate the RFC. Only proceed once the user approves.
 
+Approval is a Specify lifecycle action, not just a chat reply: run Specify `advance <id> Approved` so the RFC header and ROADMAP stay in sync. Approval of the idea or feature scope in conversation never substitutes for approval of the RFC itself.
+
 **Implementation:**
 
 - After approval, pass the RFC path to inline execution or SDD.
 - Save TDD notes under `.designify/tdd/<RFC-filename-without-extension>/` and SDD records under `.designify/sdd/<RFC-filename-without-extension>/`.
+- Status and completion tracking live in Specify-managed files only; artifacts under `.designify/` are execution evidence, not a second status ledger.
 
 ## Visual Companion
 

@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Propose a change or addition to Superpowers
+about: Propose a change or addition to Designify
 labels: enhancement
 ---
 
@@ -25,7 +25,7 @@ progress, and some were intentionally declined.
 <!-- What other approaches could solve the same problem? Why is your
      proposal better? -->
 
-## Is this appropriate for core Superpowers?
+## Is this appropriate for core Designify?
 <!-- Would this benefit someone working on a completely different kind
      of project? If this is specific to your domain, workflow, or a
      third-party tool, it may belong as its own plugin instead. -->
@@ -37,11 +37,16 @@ progress, and some were intentionally declined.
 
 | Field | Value |
 |-------|-------|
-| Superpowers version | |
+| Designify version | |
 | Harness (Claude Code, Cursor, etc.) | |
 | Harness version | |
 | Your model + version | |
 | All plugins installed | |
+
+## How will this proceed?
+<!-- Accepted features are delivered and validated as an RFC through
+     Specify (`.spec/rfc/`), and implemented only once that RFC is
+     Approved. A proposal here is not a substitute for the RFC. -->
 
 ## Context
 <!-- Optional: the workflow where you hit this, links, transcripts. -->

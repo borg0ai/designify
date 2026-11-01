@@ -3,7 +3,7 @@
 | RFC | Title | Status |
 |-----|-------|--------|
 | 0001 | [Brainstorm server CLI daemon](rfc/completed/0001-brainstorm-cli.md) | Implemented |
-| 0002 | [Clarify RFC gate in Designify skill routing](rfc/0002-designify-rfc-gate.md) | Approved |
+| 0002 | [Clarify RFC gate in Designify skill routing](rfc/completed/0002-designify-rfc-gate.md) | Implemented |
 | 0003 | [Prepare @borg0ai/brainstorm-server for npm publication](rfc/completed/0003-publish-brainstorm-cli.md) | Implemented |
 | 0004 | [Make skill prose and docs platform-neutral (Umbrella)](rfc/0004-platform-neutral-docs.md) | Draft |
 | 0005 | [Neutralize generic Claude prose (child of 0004)](rfc/0005-platform-neutral-prose.md) | Draft |
@@ -35,3 +35,7 @@
 | 0031 | [Make Qingniao post-version formatting runnable](rfc/completed/0031-qingniao-format.md) | Implemented |
 | 0032 | [Align pinned CLI documentation version](rfc/completed/0032-pin-cli-version.md) | Implemented |
 | 0033 | [Delete scripts and tests targeting removed implementations](rfc/completed/0033-delete-dead-scripts-and-tests.md) | Implemented |
+| 0034 | [Document project-scoped Codex plugin installation](rfc/0034-codex-plugin-install-docs.md) | Draft |
+| 0035 | [Make Specify the Native Designify Workflow](rfc/completed/0035-specify-native-designify-workflow.md) | Implemented |
+| 0036 | [Remove Residual Superpowers References from Repo Surfaces](rfc/0036-remove-superpowers-references.md) | Approved |
+| 0037 | [Remove upstream branding from active Designify docs](rfc/completed/0037-remove-upstream-branding-from-active-docs.md) | Implemented |

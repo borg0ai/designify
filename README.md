@@ -5,8 +5,8 @@ Designify is one OpenPlugin package with one skill entrypoint. The skill routes 
 ## Discover and install
 
 ```bash
-npx plugins discover ./designify
-npx plugins add ./designify
+npx @borg0ai/plugins discover ./designify
+npx @borg0ai/plugins add ./designify
 ```
 
 `designify/.plugin/plugin.json` is the vendor-neutral manifest read by the Plugins CLI. Skill content lives once under `designify/skills/designify/`; the CLI translates the package for supported agent tools during installation.
@@ -23,7 +23,7 @@ For project work, Designify uses Specify to create and validate RFCs under `.spe
 ## Verify discovery
 
 ```bash
-npx plugins discover ./designify
+npx @borg0ai/plugins discover ./designify
 ```
 
 This inspects the package without installing it.
@@ -32,4 +32,4 @@ This inspects the package without installing it.
 
 Author: Albert Li.
 
-Designify consolidates Superpowers source from this checkout. Existing copyright and license terms remain in force. The Git remote still identifies the upstream repository; this change does not publish or move that repository.
+Existing copyright and license terms remain in force.

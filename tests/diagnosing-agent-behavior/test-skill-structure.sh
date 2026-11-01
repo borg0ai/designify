@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Structural checks for skills/diagnosing-superpowers. Behavior is tested by
-# scenario evals kept by the maintainer; this script only checks the things a
-# shell can check: frontmatter, referenced files exist, no local paths or
-# names leaked into shipped files, SKILL.md word budget.
+# Structural checks for the diagnosing-agent-behavior workflow. Behavior is
+# tested by scenario evals kept by the maintainer; this script only checks the
+# things a shell can check: referenced files exist, no local paths or names
+# leaked into shipped files, workflow.md word budget.
 set -u
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-SKILL_DIR="$REPO_ROOT/skills/diagnosing-superpowers"
-SKILL_MD="$SKILL_DIR/SKILL.md"
+SKILL_DIR="$REPO_ROOT/designify/skills/designify/workflows/diagnosing-agent-behavior"
+SKILL_MD="$SKILL_DIR/workflow.md"
 WORD_BUDGET=1000
 
 PASSES=0
@@ -17,50 +17,25 @@ FAILURES=0
 pass() { echo "  [PASS] $1"; PASSES=$((PASSES + 1)); }
 fail() { echo "  [FAIL] $1"; FAILURES=$((FAILURES + 1)); }
 
-echo "diagnosing-superpowers structure"
+echo "diagnosing-agent-behavior structure"
 
-# --- SKILL.md frontmatter -------------------------------------------------
+# --- workflow.md exists and fits the word budget ---------------------------
 if [ -f "$SKILL_MD" ]; then
-  pass "SKILL.md exists"
-  frontmatter="$(awk 'NR==1 && $0!="---"{exit} NR>1 && $0=="---"{exit} NR>1{print}' "$SKILL_MD")"
-  if printf '%s\n' "$frontmatter" | grep -q '^name: diagnosing-superpowers$'; then
-    pass "frontmatter name is diagnosing-superpowers"
-  else
-    fail "frontmatter name is diagnosing-superpowers"
-  fi
-  description="$(printf '%s\n' "$frontmatter" | awk '/^description:/{sub(/^description:[ ]*/,""); print; found=1; next} found && /^[ ]/{print} found && !/^[ ]/{exit}' | tr '\n' ' ')"
-  if printf '%s' "$description" | grep -q '^Use when'; then
-    pass "description starts with 'Use when'"
-  else
-    fail "description starts with 'Use when' (got: ${description:0:60})"
-  fi
-  if [ "${#description}" -le 1024 ]; then
-    pass "description under 1024 characters"
-  else
-    fail "description under 1024 characters (${#description})"
-  fi
-  for banned in "dispatch" "then" "step"; do
-    if printf '%s' "$description" | grep -qiw "$banned"; then
-      fail "description contains workflow word '$banned'"
-    else
-      pass "description avoids workflow word '$banned'"
-    fi
-  done
+  pass "workflow.md exists"
 
-  # --- word budget --------------------------------------------------------
-  body_words="$(awk 'BEGIN{fm=0} NR==1 && $0=="---"{fm=1; next} fm==1 && $0=="---"{fm=2; next} fm==2{print}' "$SKILL_MD" | wc -w | tr -d ' ')"
+  body_words="$(wc -w < "$SKILL_MD" | tr -d ' ')"
   if [ "$body_words" -le "$WORD_BUDGET" ]; then
-    pass "SKILL.md body within $WORD_BUDGET words ($body_words)"
+    pass "workflow.md within $WORD_BUDGET words ($body_words)"
   else
-    fail "SKILL.md body within $WORD_BUDGET words ($body_words)"
+    fail "workflow.md within $WORD_BUDGET words ($body_words)"
   fi
 
   # --- required sections --------------------------------------------------
   for heading in "## Hard rules" "## Red Flags"; do
     if grep -q "^$heading" "$SKILL_MD"; then
-      pass "SKILL.md has section '$heading'"
+      pass "workflow.md has section '$heading'"
     else
-      fail "SKILL.md has section '$heading'"
+      fail "workflow.md has section '$heading'"
     fi
   done
 
@@ -73,7 +48,7 @@ if [ -f "$SKILL_MD" ]; then
     fi
   done < <(grep -o '\(references\|prompts\|templates\)/[A-Za-z0-9._-]*\.md' "$SKILL_MD" | sort -u)
 else
-  fail "SKILL.md exists"
+  fail "workflow.md exists"
 fi
 
 # --- expected files -------------------------------------------------------

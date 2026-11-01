@@ -1,6 +1,6 @@
 # Why: main
 
-<!-- reasongraph:v1 generated 2026-09-27 — review before sharing; edit freely, edits are preserved -->
+<!-- reasongraph:v1 generated 2026-11-01 — review before sharing; edit freely, edits are preserved -->
 
 ## Intent
 Make the designify plugin discoverable by the plugins CLI from one manifest, with Node ESM hooks and workflow scripts, a pnpm/Turbo workspace, and a public loopback brainstorm server CLI that the brainstorming skill invokes.
@@ -450,22 +450,15 @@ Reviewer attention: Confirm 0ab9621 changes only .reasongraph/why/main.md and th
 
 ### Install designify as a project-local skill copy
 Status: directed
-Touches: `.agents/skills/designify`, `skills-lock.json`
+Touches: `.agents/skills/designify/SKILL.md`, `skills-lock.json`
 
-Dogfood stays on the designify skill already in this repository, copied into the project skills directory. `npx skills add . --list` finds a single skill named designify, and `npx skills add . --skill designify --copy --yes` writes `.agents/skills/designify` plus `skills-lock.json`. The global npm prefix is left unchanged so the run uses that local copy.
-
-Considered/rejected: Driving dogfood from a globally installed CLI was set aside in favor of the repository skill copy.
-Risk: The generated skill copy and skills-lock.json can drift from the source skill.
-Reviewer attention: Confirm `.agents/skills/designify` and `skills-lock.json` are the intended local-install artifacts and that no global npm state was required.
+The project-local copy was installed again under .agents/skills/designify. SKILL.md matches the source skill directory, and skills-lock.json was generated.
 
 ### Target the Codex agent when copying designify locally
-Status: agent-initiated — not requested in plan or prompts
-Touches: `.agents/skills/designify`
+Status: discussed
+Touches: `.agents/skills/designify/SKILL.md`
 
-The local copy command passes `--agent codex`, so the installed skill is written for that host under `.agents/skills/designify`. No rationale for choosing Codex over another host was recorded.
-
-Risk: Other agent hosts may not load a skill copied only into `.agents/skills`.
-Reviewer attention: Confirm Codex is the intended agent target for this repository's local skill install.
+The project-local skill copy is the tree Codex is expected to discover. Installing it does not reload the skill list of the Codex session that is already running.
 
 ### Dogfood the installed designify skill on the registry 404
 Status: discussed
@@ -492,7 +485,144 @@ Touches: `.agents/skills/designify/SKILL.md`
 The installed designify skill at .agents/skills/designify/SKILL.md is the process entry for later work in this repository. Workflow selection follows that skill file.
 
 ### Gate persistent repository changes on a Specify RFC
-Status: discussed — follows from loading the designify skill
+Status: directed — RFC-as-source-of-truth direction given for this branch
+Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`, `.netify.json`
+
+The agent treats the Specify RFC as the only source of truth for this rename and cleanup. It creates and validates RFC 0037 first and stops before editing docs, tests, or directories until the scope is approved.
+
+Considered/rejected: Implementing the rename directly from the chat request, which would skip the approval gate and leave no reviewable scope record.
+Reviewer attention: Confirm RFC 0037 scope is approved before any active doc, test, or directory change lands.
+
+### Treat a missing local designify tree as why Codex omits the skill
+Status: discussed
+Touches: `.agents/skills/designify`, `.agents/skills/designify/SKILL.md`
+
+The current Codex skill list does not include designify because `.agents/skills/designify` is not in the repository, so discovery has no skill file to load. Codex injects the name and description of skills it finds on disk into context, and those descriptions can be shortened when many skills are present. Without that tree there is nothing for the session to list.
+
+Considered/rejected: Restarting or re-reading the current session was not treated as enough while the skill directory is absent; discovery needs the files on disk.
+Reviewer attention: Confirm whether `.agents/skills/designify` is actually missing from the worktree and from the current Codex skill list.
+
+### Rediscover designify only after a new session sees the restored SKILL.md
+Status: discussed
 Touches: `.agents/skills/designify/SKILL.md`
 
-Durable repository changes go through a Specify RFC before they are applied. The gate is the rule carried by the installed designify skill, not a separate process.
+After the project-local install, the current Codex session keeps its existing skill list. Discovery of designify is expected only when a new session starts and reads the restored SKILL.md.
+
+### Invoke $designify explicitly when it is listed but does not auto-trigger
+Status: discussed — fallback after the skill is discoverable
+Touches: `.agents/skills/designify/SKILL.md`
+
+Once designify is present in the skill list, failure to auto-trigger is handled by invoking it explicitly as `$designify`. That path assumes the skill file has already been discovered and only changes how the session starts the skill.
+
+Reviewer attention: Confirm the explicit `$designify` invocation is the intended fallback and that it matches the skill name Codex discovers from SKILL.md.
+
+### Install the designify plugin for Codex at project scope
+Status: directed
+Touches: `designify/**`, `config.toml`
+
+designify/ is the plugin root: npx plugins discover ./designify reports one skill plus hooks. The plugin CLI defaults scope to user, so the repository install is npx plugins add ./designify --target codex --scope project --yes, which updates config.toml. The CLI loads that plugin only after the agent restarts. An npx skills install does not install the full plugin.
+
+Considered/rejected: A user-scoped plugins install was rejected because the CLI default scope is user. An npx skills install was rejected because it does not install the full plugin.
+Reviewer attention: Confirm config.toml records the Codex project-scoped plugin and that an agent restart is required before it loads.
+
+### Document the Codex project-scope plugin install in RFC 0034
+Status: directed
+Touches: `.spec/rfc/0034-codex-plugin-install-docs.md`, `README.md`
+
+The README already mentions npx plugins, but the install example omits target and scope, so the CLI would default to user scope. RFC 0034 passed Specify validation and limits the change to the README: the command is npx plugins add ./designify --target codex --scope project --yes, and the text must state that npx skills does not install the full plugin. The README was not edited in this pass.
+
+Reviewer attention: Confirm the README still has the unscoped install example until RFC 0034 is approved.
+
+### Leave TASK_TRACKING.md trailing blank lines in place
+Status: agent-initiated — not requested in plan or prompts
+Touches: `TASK_TRACKING.md`
+
+git diff --check reports extra blank lines at the end of TASK_TRACKING.md. They were left in place because that file also contains existing RFC-0002 changes. No rationale was given for cleaning them in this pass.
+
+Risk: git diff --check still fails on the trailing blank lines.
+Reviewer attention: Confirm whether those trailing blank lines should be removed in a change that does not mix with the existing RFC-0002 diff.
+
+### Rebuild Designify around Specify instead of the Superpowers workflow
+Status: directed
+Touches: `.spec/ROADMAP.md`, `.spec/TASK_TRACKING.md`
+
+Designify is treated as derived from Superpowers, with the working process rebuilt to match Specify rather than carried over unchanged. The single skill entry stays the workflow front door, while .spec/ROADMAP.md and .spec/TASK_TRACKING.md remain Specify-managed. The positioning was recorded from the existing tree without editing files.
+
+Considered/rejected: Keeping the inherited Superpowers workflow as-is was set aside because the rebuild is meant to follow Specify's RFC flow.
+Reviewer attention: Confirm skill text and RFC docs describe the Specify alignment and do not still prescribe the old Superpowers workflow.
+
+### Create RFC 0037 for upstream branding removal from active docs
+Status: discussed
+Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`
+
+The agent creates RFC 0037 with the Specify CLI to scope removal of upstream product references from active documentation and regression tests. The RFC is left in Draft and passes format and sync checks.
+
+Considered/rejected: Editing the already-approved RFC 0036 to change its wording, which would rewrite an accepted spec instead of adding a new concern.
+Reviewer attention: Verify the RFC lists only active documentation and tests, not historical records.
+
+### Keep RFC 0036 source-attribution clause unchanged
+Status: discussed — agent resolved a conflict between the approved RFC and the new cleanup request
+Touches: `.spec/rfc/0036-*.md`
+
+RFC 0036 is approved and explicitly requires keeping a source-attribution mention. The agent leaves that RFC unedited and routes the broader cleanup through a separate RFC so the approved acceptance criteria stay intact.
+
+Considered/rejected: Silently removing the attribution clause from RFC 0036, which would change an approved acceptance criterion without a decision record.
+Risk: Two RFCs now pull in different directions about upstream references until one is superseded or amended.
+Reviewer attention: Decide whether RFC 0036's attribution clause should stand alongside RFC 0037's removal scope.
+
+### Exclude historical RFCs, decision records, and legal attribution from branding removal
+Status: discussed
+Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`
+
+The agent limits the cleanup to active documentation and tests. Archived RFCs, decision history, and legal authorship notices are kept as they are, to avoid rewriting history or altering copyright attribution.
+
+Considered/rejected: Removing upstream references everywhere, including archives and legal notices, which would rewrite history and touch attribution that is out of scope.
+Risk: Some upstream product names will remain visible in archived and historical files by design.
+Reviewer attention: Confirm the exclusion list matches what should stay as historical record.
+
+### Include test titles in the upstream-name removal scope
+Status: discussed — found during a read-only review of the RFC draft
+Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`
+
+A review found that test names, not only assertions, contain the old product references. The agent adds test titles to RFC 0037's scope and reruns validation, so the cleanup does not leave the old name in test output.
+
+Considered/rejected: Narrowing the cleanup to assertion regexes only, which would leave the old name in test titles and test output.
+Reviewer attention: Check that renamed test titles still describe the behavior under test.
+
+### Create project-local .netify.json with the default capabilities
+Status: discussed — file was missing and the netify workflow requires it
+Touches: `.netify.json`
+
+The repository had no .netify.json, so the agent created one listing the 12 default Netify capabilities. This lets the capability table be checked against a fixed list on every task.
+
+Considered/rejected: Running the capability check without a config file, which would leave the required capability list undefined.
+Reviewer attention: Confirm the 12 default capability names match the workflow's required set.
+
+### Generate Birdify change preview before editing docs
+Status: discussed
+Touches: `.birdify/designify-active-docs-plan.html`
+
+The agent produces a Birdify change preview that shows the proposed scope of the active-doc and test edits before any file changes. The preview passes Birdify's structural validation.
+
+Risk: The browser-based visual check of the preview was not run, because no browser tool was available in this session.
+Reviewer attention: Open the preview and confirm the listed scope matches RFC 0037 before approving.
+
+### Plan local checkout directory rename to match the project name
+Status: discussed — planned in RFC scope; not yet executed
+Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`
+
+The local checkout directory still carries the old name while the remote, package, and README already use Designify. The agent includes moving the local directory to the new name in RFC 0037's scope, so local paths match the project identity.
+
+Considered/rejected: Leaving the local directory name unchanged, which would keep the upstream name visible in local paths.
+Risk: Moving the checkout directory can break absolute paths in local tooling and registered worktrees.
+Reviewer attention: Confirm local tooling and any absolute path references are updated after the move.
+
+### Hold the designify release until the worktree is clean and main is synced
+Status: discussed — read-only release check; no release write performed
+Touches: `package.json`
+
+The agent checked release state read-only and did not tag, push, or create a GitHub release. Package version reads 6.5.0 while the latest local tag is v6.4.2, and no GitHub release was found. The Shipify preflight was blocked because the worktree had many staged and unstaged changes and local main was ahead of origin/main.
+
+Considered/rejected: Committing the pending changes and running the Shipify release immediately was rejected because the worktree held unrelated changes and the remote state could not be confirmed.
+Risk: If the pending changes are later bundled into the release commit, unrelated work would ship under the 6.5.0 version.
+Reviewer attention: Confirm the staged and unstaged changes belong to this release and that origin/main matches local main before running Shipify.

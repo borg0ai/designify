@@ -127,7 +127,9 @@ partner's explicit consent.
 Conversation memory does not survive compaction. In real sessions,
 controllers that lost their place have re-dispatched entire completed task
 sequences — the single most expensive failure observed. Track progress in
-a ledger file, not only in todos.
+a ledger file, not only in todos. The ledger is execution evidence, not a
+status authority: completion the human partner sees is reported through
+Specify-managed `.spec/` files when they authorize that lifecycle action.
 
 - Each RFC owns a workspace at
   `<repo-root>/.designify/sdd/<RFC-filename-without-extension>/`. That
@@ -476,6 +478,11 @@ When the final whole-branch review is clean and its fixes are merged,
 delete this RFC's workspace (`rm -rf <workspace>`) — the git history is
 the record now. Sibling directories belong to other plans; leave them
 alone.
+
+Before that, close the loop with Specify: when your human partner
+authorizes the lifecycle action, check off this RFC's tasks and advance
+its status with Specify commands. The ledger was execution evidence;
+Specify-managed `.spec/` files are the status authority.
 
 Use workflows/finishing-a-development-branch/workflow.md.
 
