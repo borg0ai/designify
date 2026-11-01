@@ -7,10 +7,11 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-USING_SKILL="$REPO_ROOT/skills/using-git-worktrees/SKILL.md"
-FINISHING_SKILL="$REPO_ROOT/skills/finishing-a-development-branch/SKILL.md"
+USING_SKILL="$REPO_ROOT/designify/skills/designify/workflows/using-git-worktrees/workflow.md"
+FINISHING_SKILL="$REPO_ROOT/designify/skills/designify/workflows/finishing-a-development-branch/workflow.md"
 ROTOTILL_SPEC="$REPO_ROOT/.spec/rfc/completed/0015-worktree-detect-and-defer.md"
-ROTOTILL_PLAN="$REPO_ROOT/.spec/rfc/completed/0015-worktree-detect-and-defer.md"
+# shellcheck disable=SC2088
+OLD_GLOBAL_PATH='~/.config/designify/worktrees'
 
 failures=0
 
@@ -47,17 +48,21 @@ assert_not_contains() {
 echo "=== Worktree Path Policy Test ==="
 echo ""
 
-assert_not_contains "$USING_SKILL" "~/.config/designify/worktrees" "using-git-worktrees does not mention old global path"
+if [[ ! -f "$USING_SKILL" || ! -f "$FINISHING_SKILL" || ! -f "$ROTOTILL_SPEC" ]]; then
+    echo "[FAIL] expected workflow or RFC file is missing"
+    exit 1
+fi
+
+assert_not_contains "$USING_SKILL" "$OLD_GLOBAL_PATH" "using-git-worktrees does not mention old global path"
 assert_not_contains "$USING_SKILL" "global legacy" "using-git-worktrees does not use unclear global legacy shorthand"
 assert_not_contains "$USING_SKILL" "Global path" "using-git-worktrees has no global path quick-reference row"
 assert_contains "$USING_SKILL" 'default to `.worktrees/` at the project root' "using-git-worktrees defaults new manual worktrees to .worktrees/"
 
-assert_not_contains "$FINISHING_SKILL" "~/.config/designify/worktrees" "finishing-a-development-branch does not treat old global path as owned"
+assert_not_contains "$FINISHING_SKILL" "$OLD_GLOBAL_PATH" "finishing-a-development-branch does not treat old global path as owned"
 assert_contains "$FINISHING_SKILL" '`.worktrees/` or `worktrees/`' "finishing-a-development-branch keeps project-local cleanup ownership"
 
-assert_not_contains "$ROTOTILL_SPEC" "~/.config/designify/worktrees" "rototill spec does not preserve old global path policy"
-assert_not_contains "$ROTOTILL_PLAN" "~/.config/designify/worktrees" "rototill plan does not preserve old global path policy"
-assert_not_contains "$ROTOTILL_PLAN" "legacy path compat" "rototill plan does not advertise legacy path compatibility"
+assert_not_contains "$ROTOTILL_SPEC" "$OLD_GLOBAL_PATH" "rototill spec does not preserve old global path policy"
+assert_not_contains "$ROTOTILL_SPEC" "legacy path compat" "worktree RFC does not advertise legacy path compatibility"
 
 echo ""
 

@@ -2,6 +2,11 @@
 
 Designify is one OpenPlugin package with one skill entrypoint. The skill routes requests to focused workflow references stored beside it. Those references are not separate skills.
 
+## Release 6.5.0
+
+- Ships Designify as one OpenPlugin package with a single skill entrypoint and supporting workflow guidance.
+- Includes `@borg0ai/brainstorm-server` 6.5.0, the local daemon used by the visual companion.
+
 ## Discover and install
 
 ```bash
