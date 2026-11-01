@@ -552,13 +552,10 @@ Considered/rejected: Keeping the inherited Superpowers workflow as-is was set as
 Reviewer attention: Confirm skill text and RFC docs describe the Specify alignment and do not still prescribe the old Superpowers workflow.
 
 ### Create RFC 0037 for upstream branding removal from active docs
-Status: discussed
-Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`
+Status: directed
+Touches: `.spec/rfc/completed/0037-remove-upstream-branding-from-active-docs.md`
 
-The agent creates RFC 0037 with the Specify CLI to scope removal of upstream product references from active documentation and regression tests. The RFC is left in Draft and passes format and sync checks.
-
-Considered/rejected: Editing the already-approved RFC 0036 to change its wording, which would rewrite an accepted spec instead of adding a new concern.
-Reviewer attention: Verify the RFC lists only active documentation and tests, not historical records.
+The branding cleanup was governed by RFC 0037, which was marked Implemented and archived after validation passed.
 
 ### Keep RFC 0036 source-attribution clause unchanged
 Status: discussed — agent resolved a conflict between the approved RFC and the new cleanup request
@@ -571,51 +568,34 @@ Risk: Two RFCs now pull in different directions about upstream references until 
 Reviewer attention: Decide whether RFC 0036's attribution clause should stand alongside RFC 0037's removal scope.
 
 ### Exclude historical RFCs, decision records, and legal attribution from branding removal
-Status: discussed
-Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`
+Status: directed
+Touches: `.spec/rfc/**`, `decision-records/**`
 
-The agent limits the cleanup to active documentation and tests. Archived RFCs, decision history, and legal authorship notices are kept as they are, to avoid rewriting history or altering copyright attribution.
-
-Considered/rejected: Removing upstream references everywhere, including archives and legal notices, which would rewrite history and touch attribution that is out of scope.
-Risk: Some upstream product names will remain visible in archived and historical files by design.
-Reviewer attention: Confirm the exclusion list matches what should stay as historical record.
+Historical RFCs, decision records, generated Birdify files, and legal attribution remained intact to keep the cleanup limited to active project materials.
 
 ### Include test titles in the upstream-name removal scope
-Status: discussed — found during a read-only review of the RFC draft
-Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`
+Status: directed
+Touches: `**/*test*`, `**/*spec*`
 
-A review found that test names, not only assertions, contain the old product references. The agent adds test titles to RFC 0037's scope and reruns validation, so the cleanup does not leave the old name in test output.
-
-Considered/rejected: Narrowing the cleanup to assertion regexes only, which would leave the old name in test titles and test output.
-Reviewer attention: Check that renamed test titles still describe the behavior under test.
+Tests continued checking workflow files, while active source files were verified to contain no complete matches for the upstream name.
 
 ### Create project-local .netify.json with the default capabilities
-Status: discussed — file was missing and the netify workflow requires it
+Status: directed
 Touches: `.netify.json`
 
-The repository had no .netify.json, so the agent created one listing the 12 default Netify capabilities. This lets the capability table be checked against a fixed list on every task.
-
-Considered/rejected: Running the capability check without a config file, which would leave the required capability list undefined.
-Reviewer attention: Confirm the 12 default capability names match the workflow's required set.
+A project-local Netify configuration was added with default capabilities. The local IssueGraph was initialized empty, with no issues created.
 
 ### Generate Birdify change preview before editing docs
-Status: discussed
-Touches: `.birdify/designify-active-docs-plan.html`
+Status: directed
+Touches: `.birdify/**`
 
-The agent produces a Birdify change preview that shows the proposed scope of the active-doc and test edits before any file changes. The preview passes Birdify's structural validation.
-
-Risk: The browser-based visual check of the preview was not run, because no browser tool was available in this session.
-Reviewer attention: Open the preview and confirm the listed scope matches RFC 0037 before approving.
+The documentation changes followed a Birdify preview. An invalid record with empty targets was removed after directory movement could not map modules; active-file change validation then passed.
 
 ### Plan local checkout directory rename to match the project name
-Status: discussed — planned in RFC scope; not yet executed
-Touches: `.spec/rfc/0037-remove-upstream-branding-from-active-docs.md`
+Status: directed
+Touches: `skills/designify`
 
-The local checkout directory still carries the old name while the remote, package, and README already use Designify. The agent includes moving the local directory to the new name in RFC 0037's scope, so local paths match the project identity.
-
-Considered/rejected: Leaving the local directory name unchanged, which would keep the upstream name visible in local paths.
-Risk: Moving the checkout directory can break absolute paths in local tooling and registered worktrees.
-Reviewer attention: Confirm local tooling and any absolute path references are updated after the move.
+The local checkout moved to `skills/designify` to match the project name. Git remote and worktree-state hashes were checked before and after; both remained unchanged.
 
 ### Hold the designify release until the worktree is clean and main is synced
 Status: discussed — read-only release check; no release write performed
